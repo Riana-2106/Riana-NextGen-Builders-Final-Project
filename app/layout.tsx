@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { BRAND_NAME, BRAND_TAGLINE } from "@/app/lib/constants";
 
 export const metadata: Metadata = {
   title: {
-    default: "Tantangan 90 Hari Hidup Sehat — Healthy Catering",
-    template: "%s — Tantangan 90 Hari Hidup Sehat",
+    default: `${BRAND_NAME} — ${BRAND_TAGLINE}`,
+    template: `%s — ${BRAND_NAME}`,
   },
   description:
-    "Daftar program catering sehat 90 hari untuk penurunan berat badan, lengkap dengan menu harian yang variatif.",
+    "NusaFit, layanan catering makanan sehat dari Nusantara Heritage: program Tantangan 90 Hari Hidup Sehat dengan menu harian yang variatif.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
