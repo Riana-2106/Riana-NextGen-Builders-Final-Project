@@ -1,4 +1,4 @@
-export const PROGRAM_NAME = "Tantangan 90 Hari Hidup Sehat";
+export const CHALLENGE_NAME = "Healthy Challenge";
 
 export const BRAND_NAME = "NusaFit";
 export const BRAND_TAGLINE = "Healthy Food for a Better Life.";
@@ -21,23 +21,149 @@ export const BRAND_MISSION = [
   "Memberikan pelayanan pengantaran makanan yang tepat waktu, ramah, dan siap melayani customer.",
 ];
 
-export const PACKAGE_OPTIONS = [
-  {
-    id: "lengkap",
-    name: "Lengkap — Sarapan, Makan Siang, Makan Malam & Snack",
-    description: "4x pengantaran per hari, paling sesuai untuk penurunan berat badan terstruktur.",
-  },
-  {
-    id: "hemat",
-    name: "Hemat — Makan Siang & Makan Malam",
-    description: "2x pengantaran per hari untuk yang sudah sarapan sendiri di rumah.",
-  },
-  {
-    id: "ringan",
-    name: "Ringan — Sarapan & Snack",
-    description: "2x pengantaran per hari, cocok sebagai pendamping pola makan siang/malam sendiri.",
-  },
+export const CORE_VALUES = [
+  { letter: "H", title: "Healthy Lifestyle", description: "Mendorong pola hidup sehat dalam setiap menu dan layanan yang kami berikan." },
+  { letter: "E", title: "Excellence", description: "Menjaga standar kualitas terbaik di setiap proses, dari dapur hingga pengantaran." },
+  { letter: "A", title: "Accountability", description: "Bertanggung jawab penuh atas setiap pesanan dan komitmen kepada pelanggan." },
+  { letter: "L", title: "Love & Care", description: "Menyiapkan setiap hidangan dengan kepedulian tulus terhadap kesehatan pelanggan." },
+  { letter: "T", title: "Trust", description: "Membangun kepercayaan lewat konsistensi rasa, kualitas, dan pelayanan." },
+  { letter: "H", title: "Honesty", description: "Jujur dan transparan soal bahan baku, nilai gizi, dan proses penyajian." },
 ] as const;
+
+export type NusaFitPackage = {
+  id: string;
+  name: string;
+  price: number;
+  menu: string;
+  description: string;
+  delivery: string;
+};
+
+export type NusaFitProgram = {
+  id: string;
+  name: string;
+  days: number;
+  duration: string;
+  target: string;
+  packages: NusaFitPackage[];
+};
+
+export const PROGRAMS: NusaFitProgram[] = [
+  {
+    id: "30",
+    name: "Healthy Life_30",
+    days: 30,
+    duration: "30 Hari (1 Bulan)",
+    target: "Turun Berat Badan 1-2 kg",
+    packages: [
+      {
+        id: "total",
+        name: "NusaFit Total",
+        price: 3_000_000,
+        menu: "Sarapan + Lunch + Dinner + Snack",
+        description: "Program paling lengkap",
+        delivery: "2 kali pengantaran pagi dan siang",
+      },
+      {
+        id: "balance",
+        name: "NusaFit Balance",
+        price: 2_250_000,
+        menu: "Lunch + Dinner",
+        description: "Pilihan praktis & ekonomis",
+        delivery: "1 kali pengantaran siang",
+      },
+      {
+        id: "light",
+        name: "NusaFit Light",
+        price: 1_000_000,
+        menu: "Sarapan + Snack",
+        description: "Pendamping pola makan sendiri",
+        delivery: "1 kali pengantaran pagi",
+      },
+    ],
+  },
+  {
+    id: "60",
+    name: "Healthy Life_60",
+    days: 60,
+    duration: "60 Hari (2 Bulan)",
+    target: "Turun Berat Badan 3-5 kg",
+    packages: [
+      {
+        id: "total",
+        name: "NusaFit Total",
+        price: 5_750_000,
+        menu: "Sarapan + Lunch + Dinner + Snack",
+        description: "Program paling lengkap",
+        delivery: "2 kali pengantaran pagi dan siang",
+      },
+      {
+        id: "balance",
+        name: "NusaFit Balance",
+        price: 4_250_000,
+        menu: "Lunch + Dinner",
+        description: "Pilihan praktis & ekonomis",
+        delivery: "1 kali pengantaran siang",
+      },
+      {
+        id: "light",
+        name: "NusaFit Light",
+        price: 1_950_000,
+        menu: "Sarapan + Snack",
+        description: "Pendamping pola makan sendiri",
+        delivery: "1 kali pengantaran pagi",
+      },
+    ],
+  },
+  {
+    id: "90",
+    name: "Healthy Life_90",
+    days: 90,
+    duration: "90 Hari (3 Bulan)",
+    target: "Turun Berat Badan 6-8 kg",
+    packages: [
+      {
+        id: "total",
+        name: "NusaFit Total",
+        price: 8_250_000,
+        menu: "Sarapan + Lunch + Dinner + Snack",
+        description: "Program paling lengkap",
+        delivery: "2 kali pengantaran pagi dan siang",
+      },
+      {
+        id: "balance",
+        name: "NusaFit Balance",
+        price: 6_250_000,
+        menu: "Lunch + Dinner",
+        description: "Pilihan praktis & ekonomis",
+        delivery: "1 kali pengantaran siang",
+      },
+      {
+        id: "light",
+        name: "NusaFit Light",
+        price: 2_850_000,
+        menu: "Sarapan + Snack",
+        description: "Pendamping pola makan sendiri",
+        delivery: "1 kali pengantaran pagi",
+      },
+    ],
+  },
+];
+
+export function findPackage(programId: string, packageId: string) {
+  const program = PROGRAMS.find((p) => p.id === programId);
+  const pkg = program?.packages.find((p) => p.id === packageId);
+  if (!program || !pkg) return null;
+  return { program, pkg };
+}
+
+export function formatRupiah(amount: number) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
 
 export const STATUS_LABEL: Record<string, string> = {
   BARU: "Baru",

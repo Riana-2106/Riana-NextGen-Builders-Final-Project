@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
+import { useSearchParams } from "next/navigation";
 import { registerCustomer, type RegistrationState } from "./actions";
-import { PACKAGE_OPTIONS } from "@/app/lib/constants";
+import { PROGRAMS, formatRupiah } from "@/app/lib/constants";
 
 const initialState: RegistrationState = { status: "idle" };
 
@@ -19,9 +21,9 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-full bg-accent text-white px-6 py-3 font-medium hover:opacity-90 transition-opacity disabled:opacity-60"
+      className="w-full rounded-full bg-accent text-white px-6 py-4 text-lg font-semibold shadow-lg shadow-accent/30 hover:opacity-90 hover:shadow-xl transition-all disabled:opacity-60"
     >
-      {pending ? "Mengirim..." : "Daftar Program 90 Hari"}
+      {pending ? "Mengirim..." : "Daftar Healthy Challenge"}
     </button>
   );
 }
@@ -32,6 +34,18 @@ function fieldError(state: RegistrationState, field: string) {
 
 export function RegisterForm() {
   const [state, formAction] = useActionState(registerCustomer, initialState);
+  const searchParams = useSearchParams();
+
+  const requestedProgram = searchParams.get("program");
+  const requestedPackage = searchParams.get("package");
+
+  const [programId, setProgramId] = useState(
+    PROGRAMS.find((p) => p.id === requestedProgram)?.id ?? PROGRAMS[0].id
+  );
+  const activeProgram = PROGRAMS.find((p) => p.id === programId) ?? PROGRAMS[0];
+  const [packageId, setPackageId] = useState(
+    activeProgram.packages.find((p) => p.id === requestedPackage)?.id ?? activeProgram.packages[0].id
+  );
 
   if (state.status === "success") {
     return (
@@ -43,7 +57,7 @@ export function RegisterForm() {
   }
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="space-y-6">
       {state.status === "error" && state.message && !state.fieldErrors && (
         <div className="rounded-md bg-accent-soft text-accent text-sm px-4 py-3">{state.message}</div>
       )}
@@ -108,9 +122,40 @@ export function RegisterForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-2">Pilih Paket</label>
+        <label className="block text-sm font-medium mb-2">1. Pilih Durasi Healthy Challenge</label>
+        <div className="grid sm:grid-cols-3 gap-3">
+          {PROGRAMS.map((program) => (
+            <label
+              key={program.id}
+              className="flex flex-col gap-1 rounded-lg border border-border p-3 cursor-pointer has-[:checked]:border-brand has-[:checked]:bg-brand-soft"
+            >
+              <input
+                type="radio"
+                name="programId"
+                value={program.id}
+                checked={programId === program.id}
+                onChange={() => {
+                  setProgramId(program.id);
+                  setPackageId(program.packages[0].id);
+                }}
+                className="sr-only"
+                required
+              />
+              <span className="text-sm font-semibold">{program.name}</span>
+              <span className="text-xs text-muted">{program.duration}</span>
+              <span className="text-xs text-brand-dark font-medium">{program.target}</span>
+            </label>
+          ))}
+        </div>
+        {fieldError(state, "programId") && (
+          <p className="text-xs text-accent mt-1">{fieldError(state, "programId")}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-2">2. Pilih Paket</label>
         <div className="space-y-2">
-          {PACKAGE_OPTIONS.map((pkg, index) => (
+          {activeProgram.packages.map((pkg) => (
             <label
               key={pkg.id}
               className="flex items-start gap-3 rounded-md border border-border p-3 cursor-pointer has-[:checked]:border-brand has-[:checked]:bg-brand-soft"
@@ -119,13 +164,20 @@ export function RegisterForm() {
                 type="radio"
                 name="packageId"
                 value={pkg.id}
-                defaultChecked={index === 0}
+                checked={packageId === pkg.id}
+                onChange={() => setPackageId(pkg.id)}
                 className="mt-1"
                 required
               />
-              <span>
-                <span className="block text-sm font-medium">{pkg.name}</span>
-                <span className="block text-xs text-muted">{pkg.description}</span>
+              <span className="flex-1">
+                <span className="flex items-baseline justify-between gap-2">
+                  <span className="text-sm font-medium">{pkg.name}</span>
+                  <span className="text-sm font-semibold text-brand-dark whitespace-nowrap">
+                    {formatRupiah(pkg.price)}
+                  </span>
+                </span>
+                <span className="block text-xs text-muted mt-0.5">{pkg.menu}</span>
+                <span className="block text-xs text-muted">{pkg.description} · {pkg.delivery}</span>
               </span>
             </label>
           ))}

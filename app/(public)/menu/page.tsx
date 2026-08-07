@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { db } from "@/app/lib/db";
 import { MEAL_LABEL } from "@/app/lib/constants";
+import { PageHero } from "@/app/components/PageHero";
 
 const TOTAL_WEEKS = 13;
 
@@ -23,17 +24,14 @@ export default async function MenuPage(props: PageProps<"/menu">) {
   const days = Array.from(new Set(items.map((item) => item.dayNumber))).sort((a, b) => a - b);
 
   return (
-    <div className="max-w-5xl mx-auto px-5 py-12">
-      <span className="inline-block text-xs font-semibold tracking-wide uppercase text-brand bg-brand-soft px-3 py-1 rounded-full">
-        Katalog Menu
-      </span>
-      <h1 className="font-serif text-3xl font-semibold mt-4">Menu Sehat 90 Hari</h1>
-      <p className="text-muted mt-2 max-w-2xl">
-        Menu bergilir tiap hari untuk sarapan, makan siang, makan malam, dan snack — dijamin tidak
-        berulang dalam waktu dekat.
-      </p>
-
-      <div className="mt-8 flex flex-wrap gap-2">
+    <div>
+      <PageHero
+        kicker="Katalog Menu"
+        title="Menu Sehat 90 Hari"
+        subtitle="Menu bergilir tiap hari untuk sarapan, makan siang, makan malam, dan snack — dijamin tidak berulang dalam waktu dekat."
+      />
+      <div className="max-w-5xl mx-auto px-5 py-10">
+      <div className="flex flex-wrap gap-2">
         {Array.from({ length: TOTAL_WEEKS }, (_, i) => i + 1).map((w) => (
           <Link
             key={w}
@@ -53,11 +51,11 @@ export default async function MenuPage(props: PageProps<"/menu">) {
         {days.map((day) => {
           const dayItems = items.filter((item) => item.dayNumber === day);
           return (
-            <div key={day} className="rounded-lg border border-border bg-surface p-5">
-              <h2 className="font-serif text-lg font-semibold">
+            <div key={day} className="rounded-lg border border-border bg-surface overflow-hidden">
+              <h2 className="font-serif text-base font-semibold text-white bg-brand-dark px-5 py-2.5">
                 Hari ke-{day}
               </h2>
-              <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5">
                 {dayItems.map((item) => (
                   <div key={item.id} className="rounded-md bg-surface-alt p-3">
                     <span className="text-[11px] font-semibold uppercase tracking-wide text-brand">
@@ -78,6 +76,7 @@ export default async function MenuPage(props: PageProps<"/menu">) {
         {days.length === 0 && (
           <p className="text-muted text-sm">Menu untuk minggu ini belum tersedia.</p>
         )}
+      </div>
       </div>
     </div>
   );
