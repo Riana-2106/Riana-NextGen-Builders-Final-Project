@@ -2,9 +2,10 @@
 
 import { z } from "zod";
 import { db } from "@/app/lib/db";
-import { PACKAGE_OPTIONS } from "@/app/lib/constants";
+import { PROGRAMS, findPackage, formatRupiah } from "@/app/lib/constants";
 
-const packageIds = PACKAGE_OPTIONS.map((pkg) => pkg.id) as [string, ...string[]];
+const programIds = PROGRAMS.map((p) => p.id) as [string, ...string[]];
+const packageIds = PROGRAMS[0].packages.map((p) => p.id) as [string, ...string[]];
 
 const RegistrationSchema = z.object({
   fullName: z.string().trim().min(3, "Nama lengkap minimal 3 karakter."),
@@ -16,6 +17,7 @@ const RegistrationSchema = z.object({
     .regex(/^[0-9+]+$/, "Nomor HP hanya boleh berisi angka."),
   email: z.email("Format email tidak valid."),
   address: z.string().trim().max(300).optional().or(z.literal("")),
+  programId: z.enum(programIds, { message: "Pilih salah satu program." }),
   packageId: z.enum(packageIds, { message: "Pilih salah satu paket." }),
   goal: z.string().trim().max(200).optional().or(z.literal("")),
   startDate: z.string().refine((value) => !Number.isNaN(Date.parse(value)), {
@@ -53,6 +55,11 @@ export async function registerCustomer(
   const data = parsed.data;
   const email = data.email.toLowerCase();
 
+  const selected = findPackage(data.programId, data.packageId);
+  if (!selected) {
+    return { status: "error", message: "Kombinasi program dan paket tidak valid." };
+  }
+
   const existing = await db.customer.findFirst({
     where: { OR: [{ phone: data.phone }, { email }] },
     select: { phone: true, email: true },
@@ -68,7 +75,8 @@ export async function registerCustomer(
     };
   }
 
-  const selectedPackage = PACKAGE_OPTIONS.find((pkg) => pkg.id === data.packageId);
+  const { program, pkg } = selected;
+  const packageName = `${program.name} · ${program.duration} · ${pkg.name} · ${formatRupiah(pkg.price)}`;
 
   try {
     await db.customer.create({
@@ -77,7 +85,7 @@ export async function registerCustomer(
         phone: data.phone,
         email,
         address: data.address || null,
-        packageName: selectedPackage?.name ?? data.packageId,
+        packageName,
         goal: data.goal || null,
         startDate: new Date(data.startDate),
         notes: data.notes || null,

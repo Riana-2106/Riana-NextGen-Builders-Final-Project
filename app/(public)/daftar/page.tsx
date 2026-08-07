@@ -1,4 +1,7 @@
+import { Suspense } from "react";
 import { RegisterForm } from "./RegisterForm";
+import { PageHero } from "@/app/components/PageHero";
+import { CHALLENGE_NAME } from "@/app/lib/constants";
 
 export const metadata = {
   title: "Daftar Program",
@@ -6,17 +9,16 @@ export const metadata = {
 
 export default function DaftarPage() {
   return (
-    <div className="max-w-xl mx-auto px-5 py-12">
-      <span className="inline-block text-xs font-semibold tracking-wide uppercase text-brand bg-brand-soft px-3 py-1 rounded-full">
-        Pendaftaran
-      </span>
-      <h1 className="font-serif text-3xl font-semibold mt-4">Daftar Tantangan 90 Hari</h1>
-      <p className="text-muted mt-2">
-        Isi data di bawah ini. Data kamu langsung tersimpan ke sistem kami — tidak perlu menunggu
-        balasan chat.
-      </p>
-      <div className="mt-8">
-        <RegisterForm />
+    <div>
+      <PageHero
+        kicker="Pendaftaran"
+        title={`Daftar ${CHALLENGE_NAME}`}
+        subtitle="Isi data di bawah ini. Data kamu langsung tersimpan ke sistem kami — tidak perlu menunggu balasan chat."
+      />
+      <div className="max-w-2xl mx-auto px-5 py-12">
+        <Suspense fallback={null}>
+          <RegisterForm />
+        </Suspense>
       </div>
     </div>
   );

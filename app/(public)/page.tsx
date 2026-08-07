@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { PACKAGE_OPTIONS } from "@/app/lib/constants";
+import { PROGRAMS, CHALLENGE_NAME, formatRupiah } from "@/app/lib/constants";
 
 const HIGHLIGHTS = [
   {
-    title: "90 hari menu tanpa bosan",
+    title: "Menu tanpa bosan",
     description:
       "Sarapan, makan siang, makan malam, dan snack disusun bergilir sehingga menu jarang terulang selama program berjalan.",
   },
@@ -22,8 +22,8 @@ const HIGHLIGHTS = [
 const STEPS = [
   {
     step: "1",
-    title: "Pilih paket",
-    description: "Tentukan paket makan yang sesuai kebutuhan harianmu.",
+    title: "Pilih durasi & paket",
+    description: "Tentukan Healthy Life_30, 60, atau 90 Hari, lalu pilih paket makan yang sesuai.",
   },
   {
     step: "2",
@@ -32,7 +32,7 @@ const STEPS = [
   },
   {
     step: "3",
-    title: "Menu 90 hari dimulai",
+    title: "Healthy Challenge dimulai",
     description: "Tim kami menghubungi kamu untuk konfirmasi, lalu pengantaran menu harian dimulai.",
   },
 ];
@@ -40,30 +40,39 @@ const STEPS = [
 export default function HomePage() {
   return (
     <div>
-      <section className="max-w-5xl mx-auto px-5 pt-16 pb-20">
-        <span className="inline-block text-xs font-semibold tracking-wide uppercase text-brand bg-brand-soft px-3 py-1 rounded-full">
-          Program 90 Hari
-        </span>
-        <h1 className="font-serif text-4xl sm:text-5xl font-semibold mt-5 max-w-2xl text-balance">
-          Tantangan 90 Hari Hidup Sehat &amp; Penurunan Berat Badan
-        </h1>
-        <p className="text-muted text-lg mt-5 max-w-xl">
-          Catering sehat dengan menu harian yang variatif, dan sistem pendaftaran yang tidak akan
-          membuat kamu menunggu lama atau terlewat karena antrian chat.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/daftar"
-            className="rounded-full bg-accent text-white px-6 py-3 font-medium hover:opacity-90 transition-opacity"
-          >
-            Daftar Program Sekarang
-          </Link>
-          <Link
-            href="/menu"
-            className="rounded-full border border-border px-6 py-3 font-medium hover:bg-surface-alt transition-colors"
-          >
-            Lihat Menu 90 Hari
-          </Link>
+      <section className="relative overflow-hidden">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(1100px 520px at 12% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%), linear-gradient(160deg, var(--brand-dark) 0%, var(--brand) 42%, var(--brand-soft) 100%)",
+          }}
+        />
+        <div className="max-w-5xl mx-auto px-5 pt-20 pb-24">
+          <span className="inline-block text-xs font-semibold tracking-wide uppercase text-white bg-white/15 backdrop-blur px-3 py-1 rounded-full">
+            {CHALLENGE_NAME} — 30 · 60 · 90 Hari
+          </span>
+          <h1 className="font-serif text-4xl sm:text-6xl font-semibold mt-5 max-w-2xl text-balance text-white">
+            Tantangan Hidup Sehat &amp; Penurunan Berat Badan
+          </h1>
+          <p className="text-white/90 text-lg mt-5 max-w-xl">
+            Catering sehat dengan menu harian yang variatif, dan sistem pendaftaran yang tidak akan
+            membuat kamu menunggu lama atau terlewat karena antrian chat.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-4">
+            <Link
+              href="/daftar"
+              className="rounded-full bg-accent text-white px-10 py-5 text-lg font-bold shadow-2xl shadow-black/20 hover:scale-105 hover:brightness-110 transition-all"
+            >
+              Daftar Sekarang
+            </Link>
+            <Link
+              href="/menu"
+              className="rounded-full border-2 border-white/70 text-white px-8 py-5 text-lg font-medium hover:bg-white/10 transition-colors"
+            >
+              Lihat Menu
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -91,22 +100,48 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-brand-soft">
+      <section
+        className="relative"
+        style={{
+          background:
+            "linear-gradient(180deg, var(--brand-soft) 0%, var(--background) 100%)",
+        }}
+      >
         <div className="max-w-5xl mx-auto px-5 py-16">
-          <h2 className="font-serif text-2xl font-semibold">Pilih paket sesuai kebutuhanmu</h2>
+          <h2 className="font-serif text-2xl font-semibold">Pilih durasi {CHALLENGE_NAME}-mu</h2>
+          <p className="text-muted mt-2 max-w-xl">
+            Tiap durasi tersedia 3 paket makan — dari yang paling lengkap sampai yang paling ringan.
+          </p>
           <div className="mt-8 grid sm:grid-cols-3 gap-6">
-            {PACKAGE_OPTIONS.map((pkg) => (
-              <div key={pkg.id} className="rounded-lg bg-surface border border-border p-5">
-                <h3 className="font-semibold">{pkg.name}</h3>
-                <p className="text-sm text-muted mt-2">{pkg.description}</p>
-              </div>
-            ))}
+            {PROGRAMS.map((program) => {
+              const cheapest = program.packages[program.packages.length - 1];
+              return (
+                <div
+                  key={program.id}
+                  className="rounded-xl bg-surface border border-border p-6 flex flex-col"
+                >
+                  <h3 className="font-serif text-xl font-semibold">{program.name}</h3>
+                  <p className="text-sm text-muted mt-1">{program.duration}</p>
+                  <p className="text-sm text-brand-dark font-medium mt-2">{program.target}</p>
+                  <p className="text-xs text-muted mt-4">Mulai dari</p>
+                  <p className="text-2xl font-serif font-semibold text-accent">
+                    {formatRupiah(cheapest.price)}
+                  </p>
+                  <Link
+                    href={`/daftar?program=${program.id}`}
+                    className="mt-5 inline-block text-center rounded-full bg-brand text-white px-5 py-2.5 font-medium hover:bg-brand-dark transition-colors"
+                  >
+                    Pilih {program.name}
+                  </Link>
+                </div>
+              );
+            })}
           </div>
           <Link
             href="/daftar"
-            className="inline-block mt-8 rounded-full bg-brand text-white px-6 py-3 font-medium hover:bg-brand-dark transition-colors"
+            className="inline-block mt-10 rounded-full bg-accent text-white px-10 py-5 text-lg font-bold shadow-2xl shadow-accent/30 hover:scale-105 hover:brightness-110 transition-all"
           >
-            Mulai Daftar
+            Daftar Sekarang
           </Link>
         </div>
       </section>
