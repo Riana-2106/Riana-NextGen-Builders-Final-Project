@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   BRAND_NAME,
   BRAND_TAGLINE,
@@ -13,7 +14,14 @@ export const metadata = {
 export default function TentangPage() {
   return (
     <div className="max-w-3xl mx-auto px-5 py-12">
-      <span className="inline-block text-xs font-semibold tracking-wide uppercase text-brand bg-brand-soft px-3 py-1 rounded-full">
+      <Image
+        src="/logo-nusafit.png"
+        alt={BRAND_NAME}
+        width={1254}
+        height={1254}
+        className="h-32 w-32 sm:h-40 sm:w-40 object-contain"
+      />
+      <span className="inline-block text-xs font-semibold tracking-wide uppercase text-brand bg-brand-soft px-3 py-1 rounded-full mt-6">
         Tentang Kami
       </span>
       <h1 className="font-serif text-3xl sm:text-4xl font-semibold mt-4">{BRAND_NAME}</h1>
