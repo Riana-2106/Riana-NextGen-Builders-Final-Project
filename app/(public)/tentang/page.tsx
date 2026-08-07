@@ -17,8 +17,8 @@ export default function TentangPage() {
       <Image
         src="/logo-nusafit.png"
         alt={BRAND_NAME}
-        width={1254}
-        height={1254}
+        width={600}
+        height={600}
         className="h-32 w-32 sm:h-40 sm:w-40 object-contain"
       />
       <span className="inline-block text-xs font-semibold tracking-wide uppercase text-brand bg-brand-soft px-3 py-1 rounded-full mt-6">

@@ -10,8 +10,8 @@ export function PublicHeader() {
           <Image
             src="/logo-nusafit.png"
             alt={BRAND_NAME}
-            width={1254}
-            height={1254}
+            width={600}
+            height={600}
             priority
             className="h-11 w-11 object-contain"
           />
