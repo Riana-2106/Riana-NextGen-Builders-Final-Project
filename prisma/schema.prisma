@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum RegistrationStatus {
+  BARU
+  DIHUBUNGI
+  AKTIF
+  SELESAI
+  DIBATALKAN
+}
+
+enum MealType {
+  SARAPAN
+  MAKAN_SIANG
+  MAKAN_MALAM
+  SNACK
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fullName String
+  phone    String @unique
+  email    String @unique
+  address  String?
+
+  packageName String
+  goal        String?
+  startDate   DateTime
+  notes       String?
+
+  status RegistrationStatus @default(BARU)
+
+  @@index([createdAt])
+  @@index([status])
+}
+
+model MenuItem {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  dayNumber Int
+  weekNumber Int
+  mealType  MealType
+
+  name        String
+  description String
+  category    String
+  calories    Int
+
+  @@unique([dayNumber, mealType])
+  @@index([dayNumber])
+  @@index([weekNumber])
+}
