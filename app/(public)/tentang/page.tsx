@@ -86,13 +86,23 @@ export default function TentangPage() {
               ))}
             </ol>
           </div>
-          <Photo
-            src="photos/menu-4.jpg"
-            alt="Buah dan sayur segar"
-            label="Buah & sayur segar"
-            sizes="(max-width: 640px) 100vw, 240px"
-            className="w-full aspect-square rounded-2xl shadow-md hidden sm:block"
-          />
+          {/* Stacked so the column fills the height of the seven-point mission list. */}
+          <div className="hidden sm:flex flex-col gap-6">
+            <Photo
+              src="photos/menu-4.jpg"
+              alt="Buah dan sayur segar"
+              label="Buah & sayur segar"
+              sizes="240px"
+              className="w-full aspect-square rounded-2xl shadow-md"
+            />
+            <Photo
+              src="photos/tentang-hidangan.jpg"
+              alt="Hidangan sehat NusaFit siap disajikan"
+              label="Hidangan siap saji"
+              sizes="240px"
+              className="w-full aspect-[4/3] rounded-2xl shadow-md"
+            />
+          </div>
         </div>
 
         <div className="mt-6 rounded-lg border border-border bg-surface p-6">
