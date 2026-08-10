@@ -1,4 +1,4 @@
-export const CHALLENGE_NAME = "Healthy Challenge";
+export const CHALLENGE_NAME = "Healthy Life Challenge";
 
 export const BRAND_NAME = "NusaFit";
 export const BRAND_TAGLINE = "Healthy Food for a Better Life.";
@@ -58,7 +58,7 @@ export const INFLUENCER = {
   name: "",
   handle: "",
   reach: "",
-  badge: "Healthy Challenge NusaFit",
+  badge: "Healthy Life Challenge NusaFit",
   photo: "photos/influencer.jpg",
 
   /** Shown while isRealPartner is false — brand voice, no personal claim. */

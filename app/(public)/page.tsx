@@ -52,7 +52,7 @@ const STEPS = [
   },
   {
     step: "3",
-    title: "Healthy Challenge dimulai",
+    title: `${CHALLENGE_NAME} dimulai`,
     description: "Tim kami menghubungi kamu untuk konfirmasi, lalu pengantaran menu harian dimulai.",
   },
 ];

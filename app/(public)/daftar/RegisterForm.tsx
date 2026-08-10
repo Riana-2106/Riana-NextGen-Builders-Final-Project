@@ -5,7 +5,7 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { useSearchParams } from "next/navigation";
 import { registerCustomer, type RegistrationState } from "./actions";
-import { PROGRAMS, formatRupiah } from "@/app/lib/constants";
+import { PROGRAMS, formatRupiah, CHALLENGE_NAME } from "@/app/lib/constants";
 
 const initialState: RegistrationState = { status: "idle" };
 
@@ -23,7 +23,7 @@ function SubmitButton() {
       disabled={pending}
       className="w-full rounded-full bg-accent text-white px-6 py-4 text-lg font-semibold shadow-lg shadow-accent/30 hover:opacity-90 hover:shadow-xl transition-all disabled:opacity-60"
     >
-      {pending ? "Mengirim..." : "Daftar Healthy Challenge"}
+      {pending ? "Mengirim..." : `Daftar ${CHALLENGE_NAME}`}
     </button>
   );
 }
@@ -122,7 +122,7 @@ export function RegisterForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-2">1. Pilih Durasi Healthy Challenge</label>
+        <label className="block text-sm font-medium mb-2">1. Pilih Durasi {CHALLENGE_NAME}</label>
         <div className="grid sm:grid-cols-3 gap-3">
           {PROGRAMS.map((program) => (
             <label
