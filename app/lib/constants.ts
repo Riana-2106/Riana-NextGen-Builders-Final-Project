@@ -30,6 +30,63 @@ export const CORE_VALUES = [
   { letter: "H", title: "Honesty", description: "Jujur dan transparan soal bahan baku, nilai gizi, dan proses penyajian." },
 ] as const;
 
+export const MENU_HIGHLIGHTS = [
+  {
+    emoji: "🥗",
+    name: "Grilled Chicken Salad Bowl",
+    description: "Ayam panggang, sayuran segar, dan saus rendah kalori — renyah di setiap suapan.",
+  },
+  {
+    emoji: "🍱",
+    name: "Nusantara Protein Box",
+    description: "Nasi merah, lauk khas daerah, dan sayur bening — kaya rasa, tetap ringan.",
+  },
+  {
+    emoji: "🍲",
+    name: "Soto Ayam Sehat",
+    description: "Kuah gurih rendah minyak dengan potongan ayam tanpa kulit dan tauge segar.",
+  },
+  {
+    emoji: "🥑",
+    name: "Avocado Power Bowl",
+    description: "Alpukat, quinoa, dan telur rebus — sarapan padat gizi untuk energi seharian.",
+  },
+  {
+    emoji: "🍓",
+    name: "Fruit & Yogurt Snack",
+    description: "Potongan buah musiman dengan yogurt rendah lemak, camilan manis tanpa rasa bersalah.",
+  },
+  {
+    emoji: "🍛",
+    name: "Rendang Daging Lean",
+    description: "Rendang khas Nusantara versi ramah diet — bumbu autentik, minyak jauh berkurang.",
+  },
+] as const;
+
+export const TESTIMONIALS = [
+  {
+    name: "Sarah A.",
+    role: "Pelanggan Healthy Life_60",
+    rating: 5,
+    quote:
+      "Berat badan turun 4 kg dalam 2 bulan tanpa harus masak sendiri. Menunya ganti-ganti terus, jadi nggak bosan!",
+  },
+  {
+    name: "Budi P.",
+    role: "Pelanggan Healthy Life_90",
+    rating: 5,
+    quote:
+      "Awalnya ragu makanan diet itu hambar, ternyata rasanya enak banget. Pengantarannya juga selalu tepat waktu.",
+  },
+  {
+    name: "Dewi R.",
+    role: "Pelanggan Healthy Life_30",
+    rating: 5,
+    quote:
+      "Daftarnya cepat, nggak perlu nunggu balasan chat berjam-jam. Dalam sehari langsung dikonfirmasi tim NusaFit.",
+  },
+] as const;
+
 export type NusaFitPackage = {
   id: string;
   name: string;

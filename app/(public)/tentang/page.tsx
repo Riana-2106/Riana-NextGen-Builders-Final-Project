@@ -23,7 +23,7 @@ export default function TentangPage() {
           alt={BRAND_NAME}
           width={600}
           height={600}
-          className="h-32 w-32 sm:h-40 sm:w-40 object-contain -mt-4"
+          className="h-40 w-40 sm:h-52 sm:w-52 object-contain -mt-4"
         />
 
         <div className="mt-6 space-y-4">

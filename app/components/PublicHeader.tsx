@@ -13,10 +13,10 @@ export function PublicHeader() {
             width={600}
             height={600}
             priority
-            className="h-16 w-16 object-contain"
+            className="h-20 w-20 sm:h-24 sm:w-24 object-contain"
           />
           <span
-            className="font-serif text-3xl font-bold bg-clip-text text-transparent"
+            className="font-serif text-4xl sm:text-5xl font-extrabold bg-clip-text text-transparent leading-none"
             style={{ backgroundImage: "linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%)" }}
           >
             {BRAND_NAME}
@@ -25,6 +25,9 @@ export function PublicHeader() {
         <nav className="flex items-center gap-3 sm:gap-6 text-sm">
           <Link href="/tentang" className="hidden sm:inline text-muted hover:text-foreground transition-colors">
             Tentang Kami
+          </Link>
+          <Link href="/#testimoni" className="hidden sm:inline text-muted hover:text-foreground transition-colors">
+            Testimoni
           </Link>
           <Link href="/menu" className="hidden sm:inline text-muted hover:text-foreground transition-colors">
             Menu 90 Hari
