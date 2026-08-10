@@ -138,11 +138,12 @@ function HeroBackground() {
           sizes="100vw"
           className="object-cover -z-20"
         />
+        {/* Kept only as heavy as the white headline needs to stay legible. */}
         <div
           className="absolute inset-0 -z-10"
           style={{
             background:
-              "linear-gradient(100deg, color-mix(in srgb, var(--brand-dark) 92%, transparent) 0%, color-mix(in srgb, var(--brand-dark) 72%, transparent) 45%, color-mix(in srgb, var(--brand) 30%, transparent) 100%)",
+              "linear-gradient(100deg, color-mix(in srgb, var(--brand-dark) 76%, transparent) 0%, color-mix(in srgb, var(--brand-dark) 46%, transparent) 48%, color-mix(in srgb, var(--brand) 8%, transparent) 100%)",
           }}
         />
       </>
@@ -168,13 +169,20 @@ export default function HomePage() {
         <HeroBackground />
         <div className="max-w-5xl mx-auto px-5 pt-20 pb-24">
           <div className="max-w-2xl">
-            <span className="inline-block text-xs font-semibold tracking-wide uppercase text-white bg-white/15 backdrop-blur px-3 py-1 rounded-full">
+            {/* Solid chip and text shadows carry legibility, so the overlay can stay light. */}
+            <span className="inline-block text-xs font-semibold tracking-wide uppercase text-white bg-brand-dark/75 backdrop-blur px-3 py-1.5 rounded-full">
               {CHALLENGE_NAME} — 30 · 60 · 90 Hari
             </span>
-            <h1 className="font-serif text-4xl sm:text-6xl font-semibold mt-5 text-balance text-white">
+            <h1
+              className="font-serif text-4xl sm:text-6xl font-semibold mt-5 text-balance text-white"
+              style={{ textShadow: "0 2px 18px rgba(0,0,0,.45)" }}
+            >
               Makan Enak, Badan Sehat, Tanpa Ribet Setiap Hari
             </h1>
-            <p className="text-white/90 text-lg mt-5 max-w-xl">
+            <p
+              className="text-white text-lg mt-5 max-w-xl"
+              style={{ textShadow: "0 1px 10px rgba(0,0,0,.55)" }}
+            >
               NusaFit mengantar menu sehat khas Nusantara langsung ke depan pintumu — variatif,
               bergizi, dan bikin nagih. Nggak perlu masak, nggak perlu nunggu balasan chat berjam-jam.
             </p>
