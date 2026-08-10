@@ -75,7 +75,8 @@ export default function TentangPage() {
           <p className="text-foreground leading-relaxed mt-3">{BRAND_VISION}</p>
         </div>
 
-        <div className="mt-6 grid sm:grid-cols-[1fr_minmax(0,240px)] gap-6 items-start">
+        {/* No items-start: the photo column stretches to the mission card's height. */}
+        <div className="mt-6 grid sm:grid-cols-[1fr_minmax(0,240px)] gap-6">
           <div className="rounded-lg border border-border bg-surface p-6">
             <h2 className="font-serif text-xl font-semibold text-brand-dark">Misi</h2>
             <ol className="mt-3 space-y-3 list-decimal list-inside">
@@ -93,14 +94,15 @@ export default function TentangPage() {
               alt="Buah dan sayur segar"
               label="Buah & sayur segar"
               sizes="240px"
-              className="w-full aspect-square rounded-2xl shadow-md"
+              className="w-full aspect-square shrink-0 rounded-2xl shadow-md"
             />
+            {/* Grows into whatever height is left so it ends level with the list. */}
             <Photo
               src="photos/tentang-hidangan.jpg"
               alt="Hidangan sehat NusaFit siap disajikan"
               label="Hidangan siap saji"
               sizes="240px"
-              className="w-full aspect-[4/3] rounded-2xl shadow-md"
+              className="w-full flex-1 min-h-0 rounded-2xl shadow-md"
             />
           </div>
         </div>
