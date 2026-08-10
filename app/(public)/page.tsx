@@ -262,6 +262,26 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+
+            {/* Completes the grid and routes into the full 90-day catalogue. */}
+            <Link
+              href="/menu"
+              className="rounded-2xl overflow-hidden flex flex-col items-center justify-center text-center p-6 text-white hover:-translate-y-1 hover:shadow-xl transition-all"
+              style={{
+                background:
+                  "linear-gradient(150deg, var(--brand-dark) 0%, var(--brand) 60%, color-mix(in srgb, var(--accent) 70%, var(--brand)) 100%)",
+              }}
+            >
+              <span className="font-serif text-xl leading-tight text-balance">
+                Masih banyak menu lainnya
+              </span>
+              <span className="text-white/80 text-xs mt-2 leading-relaxed">
+                Menu harian bergilir selama program berjalan
+              </span>
+              <span className="mt-4 inline-block rounded-full bg-white/15 backdrop-blur px-4 py-2 text-sm font-semibold">
+                Lihat Menu 90 Hari
+              </span>
+            </Link>
           </div>
         </div>
       </section>

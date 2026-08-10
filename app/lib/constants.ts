@@ -74,36 +74,32 @@ export const INFLUENCER = {
   partnerProlog: [] as string[],
 } as const;
 
+/** Names describe what is actually pictured in each photo. */
 export const MENU_HIGHLIGHTS = [
   {
     photo: "photos/menu-1.jpg",
-    name: "Grilled Chicken Salad Bowl",
-    description: "Ayam panggang, sayuran segar, dan saus rendah kalori — renyah di setiap suapan.",
+    name: "Grilled Chicken & Zucchini",
+    description: "Ayam panggang bumbu wijen dengan zucchini dan jamur panggang — gurih, rendah minyak.",
   },
   {
     photo: "photos/menu-2.jpg",
-    name: "Nusantara Protein Box",
-    description: "Nasi merah, lauk khas daerah, dan sayur bening — kaya rasa, tetap ringan.",
+    name: "Chicken Broccoli Meal Prep",
+    description: "Ayam suwir, brokoli, dan wortel dengan pasta gandum — porsi terukur, siap santap.",
   },
   {
     photo: "photos/menu-3.jpg",
-    name: "Soto Ayam Sehat",
-    description: "Kuah gurih rendah minyak dengan potongan ayam tanpa kulit dan tauge segar.",
+    name: "Salad Protein Box",
+    description: "Salad segar dengan telur rebus, tuna, dan alpukat dalam wadah praktis.",
   },
   {
     photo: "photos/menu-4.jpg",
-    name: "Avocado Power Bowl",
-    description: "Alpukat, quinoa, dan telur rebus — sarapan padat gizi untuk energi seharian.",
+    name: "Fresh Fruit & Veggie Bowl",
+    description: "Alpukat, stroberi, brokoli, dan buah musiman — segar dan kaya serat.",
   },
   {
     photo: "photos/menu-5.jpg",
-    name: "Fruit & Yogurt Snack",
-    description: "Potongan buah musiman dengan yogurt rendah lemak, camilan manis tanpa rasa bersalah.",
-  },
-  {
-    photo: "photos/menu-6.jpg",
-    name: "Rendang Daging Lean",
-    description: "Rendang khas Nusantara versi ramah diet — bumbu autentik, minyak jauh berkurang.",
+    name: "Snack Box Buah & Keju",
+    description: "Buah potong, keju, dan kacang panggang — camilan sehat pengganjal sore.",
   },
 ] as const;
 
