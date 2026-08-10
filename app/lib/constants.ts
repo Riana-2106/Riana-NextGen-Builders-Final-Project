@@ -41,18 +41,37 @@ export const CORE_VALUES = [
  * treating them as published claims.
  */
 
+/**
+ * Influencer / brand-partner spotlight.
+ *
+ * `isRealPartner` is false until an actual influencer partnership is signed.
+ * While it is false the section runs as brand-voice copy with a lifestyle
+ * photo and shows no personal attribution — so a stock model is never
+ * presented as a real person endorsing NusaFit.
+ *
+ * To go live with a real partner: set isRealPartner to true, fill in name,
+ * handle and reach, and replace `prolog` with their own words (with their
+ * permission), plus upload their photo as public/photos/influencer.jpg.
+ */
 export const INFLUENCER = {
-  name: "Nama Influencer",
-  handle: "@akun_influencer",
-  reach: "120rb+ pengikut",
-  badge: "Brand Partner NusaFit",
+  isRealPartner: false,
+  name: "",
+  handle: "",
+  reach: "",
+  badge: "Healthy Challenge NusaFit",
   photo: "photos/influencer.jpg",
-  headline: "“Aku nggak percaya diet bisa seenak ini.”",
-  prolog: [
-    "Jujur, aku sudah coba banyak cara buat hidup lebih sehat. Masak sendiri tiap pagi? Cuma bertahan seminggu. Beli di luar? Bingung kalorinya berapa, ujung-ujungnya balik lagi ke gorengan.",
-    "Sejak pakai NusaFit, semuanya jadi gampang. Tiap hari makanan datang tepat waktu, menunya khas Nusantara yang aku suka, dan rasanya beneran enak — bukan makanan diet yang hambar. Badan terasa lebih ringan, dan aku nggak perlu mikirin \"hari ini makan apa\" lagi.",
-    "Kalau kamu lagi cari titik mulai buat hidup lebih sehat, mulai dari piringmu. Aku sudah buktiin, sekarang giliran kamu.",
+
+  /** Shown while isRealPartner is false — brand voice, no personal claim. */
+  brandHeadline: "“Hidup sehat itu nggak harus ribet.”",
+  brandProlog: [
+    "Sudah coba banyak cara biar hidup lebih sehat? Masak sendiri tiap pagi cuma bertahan seminggu. Beli di luar, bingung kalorinya berapa, ujung-ujungnya balik lagi ke gorengan.",
+    "NusaFit bikin semuanya jadi gampang. Tiap hari makanan datang tepat waktu, menunya khas Nusantara yang kaya rasa, dan porsinya sudah disusun terukur — enak dinikmati, tetap mendukung targetmu.",
+    "Kalau kamu lagi cari titik mulai buat hidup lebih sehat, mulai dari piringmu. Pilih durasinya, sisanya biar kami yang urus.",
   ],
+
+  /** Used once isRealPartner is true — replace with the partner's own words. */
+  partnerHeadline: "",
+  partnerProlog: [] as string[],
 } as const;
 
 export const MENU_HIGHLIGHTS = [

@@ -66,6 +66,66 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
+function InfluencerSection() {
+  // Widened from the literal type so both branches stay type-checked while the
+  // partnership flag is still false.
+  const isRealPartner: boolean = INFLUENCER.isRealPartner;
+
+  const headline = isRealPartner ? INFLUENCER.partnerHeadline : INFLUENCER.brandHeadline;
+  const prolog = isRealPartner ? INFLUENCER.partnerProlog : INFLUENCER.brandProlog;
+
+  return (
+    <section className="bg-brand-dark">
+      <div className="max-w-5xl mx-auto px-5 py-16 grid md:grid-cols-[minmax(0,320px)_1fr] gap-10 items-center">
+        <Photo
+          src={INFLUENCER.photo}
+          alt={
+            isRealPartner
+              ? INFLUENCER.name
+              : "Menikmati hidangan sehat NusaFit"
+          }
+          label="Foto gaya hidup / brand partner"
+          sizes="(max-width: 768px) 100vw, 320px"
+          className="w-full aspect-[4/5] rounded-2xl shadow-2xl"
+        />
+        <div>
+          <span className="inline-block text-xs font-semibold tracking-wide uppercase text-white bg-accent px-3 py-1 rounded-full">
+            {INFLUENCER.badge}
+          </span>
+          <blockquote className="font-serif text-3xl sm:text-4xl text-white mt-5 text-balance leading-tight">
+            {headline}
+          </blockquote>
+          <div className="mt-5 space-y-3">
+            {prolog.map((paragraph, i) => (
+              <p key={i} className="text-white/85 leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          {/* Attribution appears only for a real, consenting brand partner. */}
+          {isRealPartner && (
+            <div className="mt-6">
+              <p className="text-white font-semibold">{INFLUENCER.name}</p>
+              <p className="text-white/60 text-sm">
+                {INFLUENCER.handle}
+                {INFLUENCER.reach ? ` · ${INFLUENCER.reach}` : ""}
+              </p>
+            </div>
+          )}
+
+          <Link
+            href="/daftar"
+            className="inline-block mt-7 rounded-full bg-accent text-white px-9 py-4 text-lg font-bold shadow-xl hover:scale-105 hover:brightness-110 transition-all"
+          >
+            Mulai Sekarang
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HeroBackground() {
   if (hasPhoto(HERO_PHOTO)) {
     return (
@@ -146,47 +206,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Influencer prolog */}
-      <section className="bg-brand-dark">
-        <div className="max-w-5xl mx-auto px-5 py-16 grid md:grid-cols-[minmax(0,320px)_1fr] gap-10 items-center">
-          <Photo
-            src={INFLUENCER.photo}
-            alt={INFLUENCER.name}
-            label="Foto influencer"
-            sizes="(max-width: 768px) 100vw, 320px"
-            className="w-full aspect-[4/5] rounded-2xl shadow-2xl"
-          />
-          <div>
-            <span className="inline-block text-xs font-semibold tracking-wide uppercase text-white bg-accent px-3 py-1 rounded-full">
-              {INFLUENCER.badge}
-            </span>
-            <blockquote className="font-serif text-3xl sm:text-4xl text-white mt-5 text-balance leading-tight">
-              {INFLUENCER.headline}
-            </blockquote>
-            <div className="mt-5 space-y-3">
-              {INFLUENCER.prolog.map((paragraph, i) => (
-                <p key={i} className="text-white/85 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            <div className="mt-6 flex items-center gap-3">
-              <div>
-                <p className="text-white font-semibold">{INFLUENCER.name}</p>
-                <p className="text-white/60 text-sm">
-                  {INFLUENCER.handle} · {INFLUENCER.reach}
-                </p>
-              </div>
-            </div>
-            <Link
-              href="/daftar"
-              className="inline-block mt-7 rounded-full bg-accent text-white px-9 py-4 text-lg font-bold shadow-xl hover:scale-105 hover:brightness-110 transition-all"
-            >
-              Mulai Sekarang
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Influencer / brand-partner spotlight */}
+      <InfluencerSection />
 
       {/* Why NusaFit */}
       <section className="max-w-5xl mx-auto px-5 py-16">
@@ -321,13 +342,16 @@ export default function HomePage() {
                 key={t.name}
                 className="rounded-2xl border border-border bg-background overflow-hidden flex flex-col"
               >
-                <Photo
-                  src={t.photo}
-                  alt={t.name}
-                  label={`Foto ${t.name}`}
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                  className="w-full aspect-[4/3]"
-                />
+                {/* Only real, consenting customers get a photo — no stock faces here. */}
+                {hasPhoto(t.photo) && (
+                  <Photo
+                    src={t.photo}
+                    alt={t.name}
+                    label={`Foto ${t.name}`}
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="w-full aspect-[4/3]"
+                  />
+                )}
                 <div className="p-6 flex flex-col flex-1">
                   <Stars rating={t.rating} />
                   <p className="text-sm text-foreground mt-3 leading-relaxed flex-1">
