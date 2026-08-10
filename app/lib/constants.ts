@@ -30,6 +30,159 @@ export const CORE_VALUES = [
   { letter: "H", title: "Honesty", description: "Jujur dan transparan soal bahan baku, nilai gizi, dan proses penyajian." },
 ] as const;
 
+/**
+ * Photography and endorsement content.
+ *
+ * Every `photo` path below points into /public. Until a file is uploaded there
+ * the UI renders a branded placeholder panel in its place (see components/Photo).
+ *
+ * NOTE: the influencer identity and the customer testimonials below are sample
+ * copy — replace them with a real brand partner and real customer quotes before
+ * treating them as published claims.
+ */
+
+/**
+ * Influencer / brand-partner spotlight.
+ *
+ * `isRealPartner` is false until an actual influencer partnership is signed.
+ * While it is false the section runs as brand-voice copy with a lifestyle
+ * photo and shows no personal attribution — so a stock model is never
+ * presented as a real person endorsing NusaFit.
+ *
+ * To go live with a real partner: set isRealPartner to true, fill in name,
+ * handle and reach, and replace `prolog` with their own words (with their
+ * permission), plus upload their photo as public/photos/influencer.jpg.
+ */
+export const INFLUENCER = {
+  isRealPartner: false,
+  name: "",
+  handle: "",
+  reach: "",
+  badge: "Healthy Challenge NusaFit",
+  photo: "photos/influencer.jpg",
+
+  /** Shown while isRealPartner is false — brand voice, no personal claim. */
+  brandHeadline: "“Hidup sehat itu nggak harus ribet.”",
+  brandProlog: [
+    "Sudah coba banyak cara biar hidup lebih sehat? Masak sendiri tiap pagi cuma bertahan seminggu. Beli di luar, bingung kalorinya berapa, ujung-ujungnya balik lagi ke gorengan.",
+    "NusaFit bikin semuanya jadi gampang. Tiap hari makanan datang tepat waktu, menunya khas Nusantara yang kaya rasa, dan porsinya sudah disusun terukur — enak dinikmati, tetap mendukung targetmu.",
+    "Kalau kamu lagi cari titik mulai buat hidup lebih sehat, mulai dari piringmu. Pilih durasinya, sisanya biar kami yang urus.",
+  ],
+
+  /** Used once isRealPartner is true — replace with the partner's own words. */
+  partnerHeadline: "",
+  partnerProlog: [] as string[],
+} as const;
+
+/** Names describe what is actually pictured in each photo. */
+export const MENU_HIGHLIGHTS = [
+  {
+    photo: "photos/menu-1.jpg",
+    name: "Grilled Chicken & Zucchini",
+    description: "Ayam panggang bumbu wijen dengan zucchini dan jamur panggang — gurih, rendah minyak.",
+  },
+  {
+    photo: "photos/menu-2.jpg",
+    name: "Chicken Broccoli Meal Prep",
+    description: "Ayam suwir, brokoli, dan wortel dengan pasta gandum — porsi terukur, siap santap.",
+  },
+  {
+    photo: "photos/menu-3.jpg",
+    name: "Salad Protein Box",
+    description: "Salad segar dengan telur rebus, tuna, dan alpukat dalam wadah praktis.",
+  },
+  {
+    photo: "photos/menu-4.jpg",
+    name: "Fresh Fruit & Veggie Bowl",
+    description: "Alpukat, stroberi, brokoli, dan buah musiman — segar dan kaya serat.",
+  },
+  {
+    photo: "photos/menu-5.jpg",
+    name: "Snack Box Buah & Keju",
+    description: "Buah potong, keju, dan kacang panggang — camilan sehat pengganjal sore.",
+  },
+] as const;
+
+export const WHY_NUSAFIT = [
+  {
+    photo: "photos/why-variasi.jpg",
+    title: "Varian Menu Lezat & Higienis",
+    description:
+      "Puluhan menu khas daerah dan western sehat, selalu segar dan higienis. Setiap hari terasa seperti kulineran keliling Nusantara.",
+  },
+  {
+    photo: "photos/why-gizi.jpg",
+    title: "Disusun Sesuai Kebutuhan Gizi",
+    description:
+      "Setiap menu dirancang seimbang antara protein, karbohidrat, dan serat — enak dinikmati, tetap mendukung target kesehatanmu.",
+  },
+  {
+    photo: "photos/why-fleksibel.jpg",
+    title: "Fleksibel & Tepat Waktu",
+    description:
+      "Atur jadwal dan alamat pengantaran sesuai ritme harimu. Tim kami mengantar tepat waktu, tanpa drama.",
+  },
+] as const;
+
+export const COMPARISON = {
+  left: "Masak / Beli Sendiri",
+  right: "NusaFit",
+  rows: [
+    {
+      aspect: "Pilihan Menu",
+      left: "Itu-itu saja setiap hari",
+      right: "Menu Nusantara & western bergilir tiap hari",
+    },
+    {
+      aspect: "Waktu & Tenaga",
+      left: "Belanja, masak, dan beres-beres tiap hari",
+      right: "Diantar langsung — tinggal makan",
+    },
+    {
+      aspect: "Nutrisi",
+      left: "Kalori dan porsi sulit dihitung sendiri",
+      right: "Porsi dan gizi sudah disusun terukur",
+    },
+    {
+      aspect: "Konsistensi",
+      left: "Sering bolong saat sibuk",
+      right: "Program berjalan 30/60/90 hari penuh",
+    },
+    {
+      aspect: "Pendaftaran",
+      left: "Menunggu balasan chat berjam-jam",
+      right: "Daftar online, langsung tercatat di sistem",
+    },
+  ],
+} as const;
+
+export const TESTIMONIALS = [
+  {
+    name: "Sarah A.",
+    role: "Pelanggan Healthy Life_60",
+    photo: "photos/testi-1.jpg",
+    rating: 5,
+    quote:
+      "Berat badan turun 4 kg dalam 2 bulan tanpa harus masak sendiri. Menunya ganti-ganti terus, jadi nggak bosan!",
+  },
+  {
+    name: "Budi P.",
+    role: "Pelanggan Healthy Life_90",
+    photo: "photos/testi-2.jpg",
+    rating: 5,
+    quote:
+      "Awalnya ragu makanan diet itu hambar, ternyata rasanya enak banget. Pengantarannya juga selalu tepat waktu.",
+  },
+  {
+    name: "Dewi R.",
+    role: "Pelanggan Healthy Life_30",
+    photo: "photos/testi-3.jpg",
+    rating: 5,
+    quote:
+      "Daftarnya cepat, nggak perlu nunggu balasan chat berjam-jam. Dalam sehari langsung dikonfirmasi tim NusaFit.",
+  },
+] as const;
+
 export type NusaFitPackage = {
   id: string;
   name: string;

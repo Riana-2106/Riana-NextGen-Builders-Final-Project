@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PageHero } from "@/app/components/PageHero";
+import { Photo } from "@/app/components/Photo";
 import {
   BRAND_NAME,
   BRAND_TAGLINE,
@@ -17,37 +18,93 @@ export default function TentangPage() {
   return (
     <div>
       <PageHero kicker="Tentang Kami" title={BRAND_NAME} subtitle={BRAND_TAGLINE} />
-      <div className="max-w-3xl mx-auto px-5 py-12">
-        <Image
-          src="/logo-nusafit.png"
-          alt={BRAND_NAME}
-          width={600}
-          height={600}
-          className="h-32 w-32 sm:h-40 sm:w-40 object-contain -mt-4"
-        />
 
-        <div className="mt-6 space-y-4">
-          {BRAND_STORY.map((paragraph, i) => (
-            <p key={i} className="text-foreground leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
+      {/* Story, paired with a photo so the page opens visually rather than as text. */}
+      <section className="max-w-5xl mx-auto px-5 py-12">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <Image
+              src="/logo-nusafit.png"
+              alt={BRAND_NAME}
+              width={600}
+              height={600}
+              className="h-28 w-28 sm:h-32 sm:w-32 object-contain"
+            />
+            <div className="mt-5 space-y-4">
+              {BRAND_STORY.map((paragraph, i) => (
+                <p key={i} className="text-foreground leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+          <Photo
+            src="photos/tentang-tim.jpg"
+            alt="Suasana layanan NusaFit"
+            label="Foto tim / suasana layanan"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="w-full aspect-[4/3] rounded-2xl shadow-xl"
+          />
         </div>
+      </section>
 
-        <div className="mt-10 rounded-lg border border-border bg-surface p-6">
+      {/* Full-width ingredient banner breaking up the reading flow. */}
+      <section className="relative">
+        <Photo
+          src="photos/tentang-bahan.jpg"
+          alt="Bahan-bahan segar pilihan NusaFit"
+          label="Bahan segar pilihan"
+          sizes="100vw"
+          priority={false}
+          className="w-full h-56 sm:h-72"
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 bg-brand-dark/50" />
+          <p
+            className="relative font-serif text-2xl sm:text-3xl text-white text-center px-5 text-balance"
+            style={{ textShadow: "0 2px 14px rgba(0,0,0,.6)" }}
+          >
+            Bahan segar pilihan, setiap hari.
+          </p>
+        </div>
+      </section>
+
+      <div className="max-w-3xl mx-auto px-5 py-12">
+        <div className="rounded-lg border border-border bg-surface p-6">
           <h2 className="font-serif text-xl font-semibold text-brand-dark">Visi</h2>
           <p className="text-foreground leading-relaxed mt-3">{BRAND_VISION}</p>
         </div>
 
-        <div className="mt-6 rounded-lg border border-border bg-surface p-6">
-          <h2 className="font-serif text-xl font-semibold text-brand-dark">Misi</h2>
-          <ol className="mt-3 space-y-3 list-decimal list-inside">
-            {BRAND_MISSION.map((item, i) => (
-              <li key={i} className="text-foreground leading-relaxed pl-1">
-                {item}
-              </li>
-            ))}
-          </ol>
+        {/* No items-start: the photo column stretches to the mission card's height. */}
+        <div className="mt-6 grid sm:grid-cols-[1fr_minmax(0,240px)] gap-6">
+          <div className="rounded-lg border border-border bg-surface p-6">
+            <h2 className="font-serif text-xl font-semibold text-brand-dark">Misi</h2>
+            <ol className="mt-3 space-y-3 list-decimal list-inside">
+              {BRAND_MISSION.map((item, i) => (
+                <li key={i} className="text-foreground leading-relaxed pl-1">
+                  {item}
+                </li>
+              ))}
+            </ol>
+          </div>
+          {/* Stacked so the column fills the height of the seven-point mission list. */}
+          <div className="hidden sm:flex flex-col gap-6">
+            <Photo
+              src="photos/menu-4.jpg"
+              alt="Buah dan sayur segar"
+              label="Buah & sayur segar"
+              sizes="240px"
+              className="w-full aspect-square shrink-0 rounded-2xl shadow-md"
+            />
+            {/* Grows into whatever height is left so it ends level with the list. */}
+            <Photo
+              src="photos/tentang-hidangan.jpg"
+              alt="Hidangan sehat NusaFit siap disajikan"
+              label="Hidangan siap saji"
+              sizes="240px"
+              className="w-full flex-1 min-h-0 rounded-2xl shadow-md"
+            />
+          </div>
         </div>
 
         <div className="mt-6 rounded-lg border border-border bg-surface p-6">
